@@ -1,0 +1,35 @@
+'''
+My program calculates the percentage of plagiarism between two given sentences.
+The user needs to type a sentence that has the same number of words as the original sentence(to type as well).
+The program needs to get rid of any additional useless space characters in the input text(in order to have the exact number of words as the OS).
+The program finds the common words between the OS and the IT (doesn't differenciate between uppercase and lowercase words).
+The percentage of plagiarism is calculated:(number of common words/number of words in the OS)*100 .
+Check if the percentage is greater than or equal to 50% and then write a correspondant message to each case.
+'''
+
+import re
+
+original_sentence = input("write the original sentence:")
+num_words_os = len(original_sentence.split(" "))
+original_sentence = original_sentence.upper()
+tested_input = ""
+
+while len(tested_input.split(" ")) != num_words_os:
+    tested_input = input("write your sentence please:")
+    tested_input = re.sub(' +', ' ', tested_input)
+tested_input = tested_input.upper()
+
+common_words = []
+for original_word in original_sentence.split(" "):
+    for tested_word in tested_input.split(" "):  
+        if tested_word == original_word:
+            common_words.append(tested_word) 
+
+print("the common words are :", common_words)                                 
+print("their number is " + str(len(common_words)))
+      
+percentage = (len(common_words)/num_words_os)*100
+if percentage < 50:
+    print("the matching percentage is " + str(percentage) + "% which is < 50% so the text is NOT PLAGIARIZED.")
+else:
+    print("the matching percentage is " + str(percentage) + "% which is >= 50% so the text is PLAGIARIZED!!!!")
